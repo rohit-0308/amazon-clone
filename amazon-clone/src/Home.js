@@ -39,16 +39,28 @@ function Home() {
           />
           <Product
             id="23445930"
-            title="Amazon Echo (3rd Gen) – Improved sound, powered by Dolby (Black)"
+            title="Amazon Echo (3rd Gen) – Powered by Dolby (Black)"
             price={9749}
             image="https://m.media-amazon.com/images/I/7128HRanJgL._AC_UY327_FMwebp_QL65_.jpg"
             rating={4}
           />
-          <Product />
+          <Product
+            id="3254354345"
+            title="MuscleBlaze Whey Protein (Rich Milk Chocolate, 4lb)"
+            price={3219}
+            image="https://m.media-amazon.com/images/I/61YRzGcsleL._AC_UL480_FMwebp_QL65_.jpg"
+            rating={4}
+          />
         </div>
 
         <div className="home__row">
-          <Product />
+          <Product
+            id="90829332"
+            title="LG 139 cm (55 inches) 4K UHD Smart LED TV 55UM7290PTD (Ceramic BK + Dark Steel Silver) (2019 Model)"
+            price={52998}
+            image="https://m.media-amazon.com/images/I/71xMxbdxrsL._AC_UY327_FMwebp_QL65_.jpg"
+            rating={4}
+          />
         </div>
       </div>
     </div>
