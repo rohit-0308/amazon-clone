@@ -4,9 +4,10 @@ import CurrencyFormat from "react-currency-format";
 import "./Payment.css";
 import { getBasketTotal } from "./reducer";
 import { useStateValue } from "./StateProvider";
-import { Link, useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "./axios";
+import { db } from "./firebase";
 
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -27,12 +28,14 @@ function Payment() {
       const response = await axios({
         method: "post",
         //Stripe expects the total in a currencies subunits
-        url: `/payments/create?total=${getBasketTotal(basket)}`,
+        url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
       });
       setClientSecret(response.data.clientSecret);
     };
     getClientSecret();
   }, [basket]);
+
+  console.log("the secret is ", clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,12 +48,27 @@ function Payment() {
         },
       })
       .then(({ paymentIntent }) => {
-          //paymentIntent = payment confirmation
-          setSucceeded(true);
-          setError(null);
-          setProcessing(false);
+        //paymentIntent = payment confirmation
 
-          history.replace('/orders');
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false);
+
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
+
+        history.replace("/orders");
       });
   };
 
