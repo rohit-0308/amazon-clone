@@ -12,7 +12,10 @@
     z-index: 1;
 }
 
-
+.product:hover {
+    transform: scale(1.04);
+    box-shadow: lightgray ;
+}
 
 .product__rating {
     display: flex;
@@ -38,7 +41,6 @@
 }
 
 .product__info {
-    
     height: 100px;
     margin-bottom: 15px;
 }

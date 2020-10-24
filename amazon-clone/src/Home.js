@@ -62,6 +62,16 @@ function Home() {
             rating={4}
           />
         </div>
+
+        <div className="home__row">
+          <Product
+            id="90829333"
+            title="LG 139 cm (55 inches) 4K UHD Smart LED TV 55UM7290PTD (Ceramic BK + Dark Steel Silver) (2019 Model)"
+            price={52998}
+            image="https://m.media-amazon.com/images/I/71xMxbdxrsL._AC_UY327_FMwebp_QL65_.jpg"
+            rating={4}
+          />
+        </div>
       </div>
     </div>
   );
